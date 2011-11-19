@@ -6,6 +6,11 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign silent-rules color-tests])
 LT_INIT([disable-shared pic-only])
 
+# Due to a bug in m4/ltoptions.m4, the pic-only option for LT_INIT
+# does not work. Checked with libtool version up to 1.4.2.
+# Hack up the effect here
+test "$pic_mode" = 'default' && pic_mode=yes
+
 dnl Cross-compilation support
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
