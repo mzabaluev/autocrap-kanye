@@ -20,7 +20,7 @@ libkanye_notify_la_SOURCES = kanye-notify.c kanye-notify.h
 
 libkanye_notify_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) $(NOTIFY_CFLAGS) -DG_LOG_DOMAIN=\"$(PACKAGE)\"
-libkanye_notify_la_CFLAGS = $(CFLAGS_INTERNAL)
+libkanye_notify_la_CFLAGS = $(CFLAG_VISIBILITY)
 libkanye_notify_la_LIBADD = $(NOTIFY_LIBS)
 
 libkanye_la_LIBADD += libkanye-notify.la
