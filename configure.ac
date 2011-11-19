@@ -1,10 +1,10 @@
 AC_PREREQ([2.60])
-AC_INIT([autocrap-rocks], [1.0])
+AC_INIT([autocrap-kanye], [1.0])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign silent-rules color-tests])
-LT_INIT([disable-static])
+LT_INIT([disable-shared pic-only])
 
 dnl Cross-compilation support
 AC_CANONICAL_BUILD
@@ -52,13 +52,8 @@ AM_CONDITIONAL([KANYE_NOTIFY], [test "$have_libnotify" = 'yes'])
 
 AC_CONFIG_FILES([
   Makefile
-  lib/Makefile
-  lib/old/Makefile
-  lib/old/old.pc
-  lib/crap/Makefile
-  lib/crap/crap.pc
+  kanye/Makefile
   po/Makefile.in
-  src/Makefile
   tests/Makefile
 ])
 AC_OUTPUT

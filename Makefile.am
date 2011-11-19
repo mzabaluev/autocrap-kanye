@@ -1,6 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = po lib src tests
+SUBDIRS = po kanye tests
 
 EXTRA_DIST = config.rpath
-

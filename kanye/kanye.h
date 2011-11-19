@@ -5,5 +5,5 @@ void kanye_storm_stage();
 void kanye_drag_off_stage();
 void kanye(const char *message);
 
-#endif  /* AUTOCRAP_OLD_H_ */
+#endif  /* AUTOCRAP_KANYE_H_ */
 
