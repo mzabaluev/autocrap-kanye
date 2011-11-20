@@ -7,11 +7,13 @@ AM_INIT_AUTOMAKE([foreign silent-rules color-tests])
 LT_INIT
 
 dnl Project configuration flags
+AC_MSG_CHECKING([whether to install Kanye])
 AC_ARG_ENABLE([kanye-install],
   [AS_HELP_STRING([--enable-kanye-install],
      [install the Kanye library with make install])],
   [],
   [enable_kanye_install=no])
+AC_MSG_RESULT([$enable_kanye_install])
 AM_CONDITIONAL([KANYE_INSTALL], [test "$enable_kanye_install" = 'yes'])
 
 dnl Cross-compilation support
