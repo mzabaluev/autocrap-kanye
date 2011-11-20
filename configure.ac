@@ -4,12 +4,15 @@ AC_INIT([autocrap-kanye], [1.0])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign silent-rules color-tests])
-LT_INIT([disable-shared pic-only])
+LT_INIT
 
-# Due to a bug in m4/ltoptions.m4, the pic-only option for LT_INIT
-# does not work. Checked with libtool version up to 1.4.2.
-# Hack up the effect here
-test "$pic_mode" = 'default' && pic_mode=yes
+dnl Project configuration flags
+AC_ARG_ENABLE([kanye-install],
+  [AS_HELP_STRING([--enable-kanye-install],
+     [install the Kanye library with make install])],
+  [],
+  [enable_kanye_install=no])
+AM_CONDITIONAL([KANYE_INSTALL], [test "$enable_kanye_install" = 'yes'])
 
 dnl Cross-compilation support
 AC_CANONICAL_BUILD
