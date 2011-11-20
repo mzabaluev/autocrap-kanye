@@ -2,3 +2,9 @@ This is an example project to serve as a demonstration for
 subproject inclusion capabilities of GNU autotools.
 It is used as an internal subproject in a bigger testbed project,
 autocrap-rocks.
+
+However, Kanye packs a feature punch of its own. It provides an autoconf macro
+to help its mother project share bits of its configuration. It is built as a
+non-installable static library by default to accommodate its principal usage
+as an internal module in the mother project, but offers an option to install
+it into the system as a shared and/or a static library.
