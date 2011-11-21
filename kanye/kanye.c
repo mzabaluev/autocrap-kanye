@@ -17,15 +17,13 @@ typedef enum {
   KANYE_OUTPUT_NOTIFY,
 } KanyeOutput;
 
-static KanyeOutput kanye_output = KANYE_OUTPUT_STDOUT;
+static KanyeOutput kanye_output = KANYE_OUTPUT_DEFAULT;
 
 static int kanye_been_on_stage = 0;
 
 void kanye_storm_stage()
 {
-#ifdef HAVE_LIBNOTIFY
     char *kanye_output_env;
-#endif
 
     if (kanye_been_on_stage) {
         fputs("Kanye: I ain't gonna do it twice for you, man!\n", stderr);
@@ -37,11 +35,22 @@ void kanye_storm_stage()
     bindtextdomain(PACKAGE, LOCALEDIR);
 #endif
 
-#ifdef HAVE_LIBNOTIFY
     kanye_output_env = getenv("KANYE_OUTPUT");
-    if (kanye_output_env != NULL && strcmp(kanye_output_env, "notify") == 0) {
-        kanye_notify_init();
+
+    if (kanye_output_env == NULL) {
+        /* Use the default */
+    } else if (strcmp(kanye_output_env, "stdout") == 0) {
+        kanye_output = KANYE_OUTPUT_STDOUT;
+    }
+#ifdef HAVE_LIBNOTIFY
+    else if (strcmp(kanye_output_env, "notify") == 0) {
         kanye_output = KANYE_OUTPUT_NOTIFY;
+    }
+#endif
+
+#ifdef HAVE_LIBNOTIFY
+    if (kanye_output == KANYE_OUTPUT_NOTIFY) {
+        kanye_notify_init();
     }
 #endif
 }

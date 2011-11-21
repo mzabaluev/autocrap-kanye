@@ -32,6 +32,30 @@ dnl Dependency checks, optional features
 KANYE_CHECK_IT_OUT
 AM_CONDITIONAL([KANYE_NOTIFY], [test "$KANYE_HAS_LIBNOTIFY" = 'yes'])
 
+AC_ARG_ENABLE([output-default],
+  AS_HELP_STRING([--enable-output-default=(stdout|notify)],
+    [The output backend to use when not specified [default=stdout]]),
+  [],
+  [enable_output_default=stdout])
+case $enable_output_default in
+  notify)
+    if test "$KANYE_HAS_LIBNOTIFY" = 'yes'; then
+      kanye_output_default=KANYE_OUTPUT_NOTIFY
+    else
+      AC_MSG_WARN([libnotify is not available, falling back to stdout for default output])
+      kanye_output_default=KANYE_OUTPUT_STDOUT
+      enable_output_default=stdout
+    fi
+    ;;
+  *)
+    kanye_output_default=KANYE_OUTPUT_STDOUT
+    enable_output_default=stdout
+    ;;
+esac
+AC_MSG_NOTICE([default output backend is $enable_output_default])
+AC_DEFINE_UNQUOTED([KANYE_OUTPUT_DEFAULT], [$kanye_output_default],
+  [The output backend to use by default])
+
 AC_CONFIG_FILES([
   Makefile
   kanye/Makefile
